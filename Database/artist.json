@@ -1,0 +1,4 @@
+{"_id":{"$oid":"5c98f8df42063a8fb330456d"},"nom":"PNL","birth":{"$date":{"$numberLong":"1262300400000"}},"followers":{"$numberInt":"14000"},"albums":[{"$oid":"5c98fdcbf1fe2c33942117c3"},{"$oid":"5c9908d27e8ba021d08a5109"}]}
+{"_id":{"$oid":"5c990c4cde466921d0717ea9"},"nom":"Beyoncé","birth":{"$date":{"$numberLong":"-31539600000"}},"followers":{"$numberInt":"1400000"},"albums":{"$oid":"5c990c26de466921d0717ea8"}}
+{"_id":{"$oid":"5c990ca1de466921d0717eaa"},"nom":"Kygo","birth":{"$date":{"$numberLong":"69202800000"}},"followers":{"$numberInt":"2000000"},"albums":{"$oid":"5c990b4ade466921d0717ea6"}}
+{"_id":{"$oid":"5c990cc7de466921d0717eab"},"nom":"Hizuru","birth":{"$date":{"$numberLong":"-242960400000"}},"followers":{"$numberInt":"30000"},"albums":{"$oid":"5c990bc6de466921d0717ea7"}}

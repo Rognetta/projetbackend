@@ -1,0 +1,10 @@
+{"_id":{"$oid":"5c98fea1f1fe2c33942117c5"},"title":"Au DD","duration":{"$numberInt":"180"},"listenings":{"$numberInt":"60000"},"likes":{"$numberInt":"30000"},"featuring":{"$oid":"5c98f8df42063a8fb330456d"}}
+{"_id":{"$oid":"5c9907fb7e8ba021d08a5103"},"title":"Le monde ou Rien","duration":{"$numberInt":"200"},"listenings":{"$numberInt":"65465"},"likes":{"$numberInt":"13215"},"featuring":{"$oid":"5c98f8df42063a8fb330456d"}}
+{"_id":{"$oid":"5c9908437e8ba021d08a5105"},"title":"lala","duration":{"$numberInt":"160"},"listenings":{"$numberInt":"56416"},"likes":{"$numberInt":"15641"},"featuring":{"$oid":"5c98f8df42063a8fb330456d"}}
+{"_id":{"$oid":"5c99086b7e8ba021d08a5107"},"title":"La petite voix","duration":{"$numberInt":"210"},"listenings":{"$numberInt":"124561"},"likes":{"$numberInt":"23516"},"featuring":{"$oid":"5c98f8df42063a8fb330456d"}}
+{"_id":{"$oid":"5c990dbdde466921d0717eac"},"title":"Never Let You Go","duration":{"$numberInt":"220"},"listenings":{"$numberInt":"216512"},"likes":{"$numberInt":"12346"},"featuring":{"$oid":"5c990ca1de466921d0717eaa"}}
+{"_id":{"$oid":"5c990de7de466921d0717ead"},"title":"Sunrise","duration":{"$numberInt":"200"},"listenings":{"$numberInt":"265235"},"likes":{"$numberInt":"7853"},"featuring":{"$oid":"5c990ca1de466921d0717eaa"}}
+{"_id":{"$oid":"5c990e11de466921d0717eae"},"title":"Oiran","duration":{"$numberInt":"120"},"listenings":{"$numberInt":"37844"},"likes":{"$numberInt":"2540"},"featuring":{"$oid":"5c990cc7de466921d0717eab"}}
+{"_id":{"$oid":"5c990e29de466921d0717eaf"},"title":"Ginshu","duration":{"$numberInt":"150"},"listenings":{"$numberInt":"26450"},"likes":{"$numberInt":"1862"},"featuring":{"$oid":"5c990cc7de466921d0717eab"}}
+{"_id":{"$oid":"5c990e54de466921d0717eb0"},"title":"I Miss You","duration":{"$numberInt":"182"},"listenings":{"$numberInt":"1235023"},"likes":{"$numberInt":"60240"},"featuring":{"$oid":"5c990c4cde466921d0717ea9"}}
+{"_id":{"$oid":"5c990e76de466921d0717eb1"},"title":"Rather Die Young","duration":{"$numberInt":"226"},"listenings":{"$numberInt":"2285924"},"likes":{"$numberInt":"126543"},"featuring":{"$oid":"5c990c4cde466921d0717ea9"}}
