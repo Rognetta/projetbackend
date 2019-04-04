@@ -40,8 +40,8 @@ exports.create = (req, res) => {
 
 exports.findAll = (req, res) => {
     Album.find()
-        .then(users => {
-            res.send(users);
+        .then(albums => {
+            res.send(albums);
         })
 
         .catch(err => {
@@ -51,27 +51,27 @@ exports.findAll = (req, res) => {
         });
 };
 
-// Find a single User with a UserIdù
+// Find a single User with a UserId
 /** @member {Object} */
 
 exports.findOne = (req, res) => {
     Album.findById(req.params.id)
-        .then(user => {
-            if (!user) {
+        .then(album => {
+            if (!album) {
                 return res.status(404).send({
-                    message: 'User not found with id ' + req.params.userId
+                    message: 'User not found with id ' + req.params.id
                 });
             }
-            res.send(user);
+            res.send(album);
         })
         .catch(err => {
             if (err.kind === 'ObjectId') {
                 return res.status(404).send({
-                    message: 'User not found with id ' + req.params.userId
+                    message: 'User not found with id ' + req.params.id
                 });
             }
             return res.status(500).send({
-                message: 'Error retrieving user with id ' + req.params.userId
+                message: 'Error retrieving user with id ' + req.params.id
             });
         });
 };
@@ -79,48 +79,51 @@ exports.findOne = (req, res) => {
 // Update a User identified by the UserId in the request
 exports.update = (req, res) => {
     // Validate Request
-    if (!req.body.firstName) {
+    if (!req.body.nom) {
         return res.status(400).send({
             message: 'first name can not be empty'
         });
     }
 
     // Find user and update it with the request body
-    User.findByIdAndUpdate(
-        req.params.userId,
+    Album.findByIdAndUpdate(
+        req.params.id,
         {
-            title: req.body.firstName,
-            content: req.body.lastName || ''
+            title: req.body.nom,
+            date: req.body.date,
+            genre : req.body.genre,
+            cover_URL : req.body.cover_URL,
+            tracks : req.body.tracks || ''
         },
         { new: true }
     )
-        .then(user => {
-            if (!user) {
+        .then(album => {
+            if (!album) {
                 return res.status(404).send({
-                    message: 'User not found with id ' + req.params.userId
+                    message: 'User not found with id ' + req.params.id
                 });
             }
-            res.send(user);
+            res.send(album);
         })
         .catch(err => {
             if (err.kind === 'ObjectId') {
                 return res.status(404).send({
-                    message: 'User not found with id ' + req.params.userId
+                    message: 'User not found with id ' + req.params.id
                 });
             }
             return res.status(500).send({
-                message: 'Error updating user with id ' + req.params.userId
+                message: 'Error updating user with id ' + req.params.id
             });
         });
 };
 
 // Delete a User with the specified UserId in the request
 exports.delete = (req, res) => {
-    User.findByIdAndRemove(req.params.userId)
-        .then(user => {
-            if (!user) {
+    Album.findByIdAndRemove(req.params.albumId)
+        .then(album => {
+            if (!album) {
                 return res.status(404).send({
-                    message: 'User not found with id ' + req.params.userId
+                    message: 'User not found with id ' + req.params.id
                 });
             }
             res.send({ message: 'User deleted successfully!' });
@@ -128,11 +131,11 @@ exports.delete = (req, res) => {
         .catch(err => {
             if (err.kind === 'ObjectId' || err.name === 'NotFound') {
                 return res.status(404).send({
-                    message: 'User not found with id ' + req.params.userId
+                    message: 'User not found with id ' + req.params.id
                 });
             }
             return res.status(500).send({
-                message: 'Could not delete user with id ' + req.params.userId
+                message: 'Could not delete user with id ' + req.params.id
             });
         });
 };

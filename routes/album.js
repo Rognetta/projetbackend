@@ -4,6 +4,7 @@ var router = express.Router();
 var user = require('../controllers/album.controller.js');
 
 router.get('/:id', user.findOne);
+router.get('/:id', user.findAll);
 
 router.delete(':/id', user.delete);
 router.post(':/id', user.update);
