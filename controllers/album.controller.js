@@ -13,7 +13,7 @@ exports.create = (req, res) => {
     const album = new Album({
 
         title: req.body.title,
-        date: req.body.date,
+        date: req.body.release,
         genre : req.body.genre,
         cover_URL : req.body.cover_URL,
         tracks : req.body.tracks || ''
@@ -47,7 +47,7 @@ exports.findAll = (req, res) => {
         .catch(err => {
             res.status(500).send({
                 message: err.message || 'Some error occurred while retrieving users.'
-            });
+            })
         });
 };
 

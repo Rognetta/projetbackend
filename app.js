@@ -4,16 +4,15 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 
-var albumsRouter = require('./routes/album');
+var albumsRouter = require('./routes/album.js');
 
 var app = express();
 
 //mongoose connection
 
 var mongoose = require('mongoose');
-var mongoUrl = '"mongodb://localhost/projetWebBackEnd"';
+var mongoUrl = 'mongodb://localhost/projetWebBackEnd';
 mongoose.connect(mongoUrl, { useNewUrlParser: true });
 var db = mongoose.connection;
 
@@ -30,7 +29,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/album', albumsRouter);
 
 module.exports = app;

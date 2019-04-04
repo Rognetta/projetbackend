@@ -9,7 +9,7 @@ const albumSchema = new mongoose.Schema(
             required : true
         },
 
-        date : {
+        release : {
 
             type : Date
         },

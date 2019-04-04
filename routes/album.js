@@ -3,11 +3,11 @@ const express = require('express');
 var router = express.Router();
 var user = require('../controllers/album.controller.js');
 
+router.get('/', user.findAll);
 router.get('/:id', user.findOne);
-router.get('/:id', user.findAll);
 
-router.delete(':/id', user.delete);
-router.post(':/id', user.update);
+router.delete('/:id', user.delete);
+router.post('/:id', user.update);
 
 router.put('/', user.create);
 
