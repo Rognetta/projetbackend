@@ -6,10 +6,11 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "chalk": "^2.4.2",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
-    "express": "~4.16.0",
-    "mongoose": "^5.4.21",
+    "express": "^4.16.4",
+    "mongoose": "^5.4.22",
     "morgan": "~1.9.0"
   }
 }

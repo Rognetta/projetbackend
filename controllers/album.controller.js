@@ -4,8 +4,6 @@ const Album = require('../models/albums.model.js');
 exports.create = (req, res) => {
     // Validate request
     if (!req.body.title) {
-        // If firstName is not present in body reject the request by
-        // sending the appropriate http code
         return res.status(400).send({
             message: 'title can not be empty'
         });
@@ -13,11 +11,12 @@ exports.create = (req, res) => {
 
     // Create a new User
     const album = new Album({
+
         title: req.body.title,
-        date: req.body.date || '',
+        date: req.body.date,
         genre : req.body.genre,
         cover_URL : req.body.cover_URL,
-        tracks : req.body.tracks
+        tracks : req.body.tracks || ''
     });
 
     // Save User in the database
@@ -37,11 +36,14 @@ exports.create = (req, res) => {
 };
 
 // Retrieve and return all Users from the database.
+/** @member {Object} */
+
 exports.findAll = (req, res) => {
     Album.find()
         .then(users => {
             res.send(users);
         })
+
         .catch(err => {
             res.status(500).send({
                 message: err.message || 'Some error occurred while retrieving users.'
@@ -49,9 +51,11 @@ exports.findAll = (req, res) => {
         });
 };
 
-// Find a single User with a UserId
+// Find a single User with a UserIdù
+/** @member {Object} */
+
 exports.findOne = (req, res) => {
-    Album.findById(req.params.alumId)
+    Album.findById(req.params.id)
         .then(user => {
             if (!user) {
                 return res.status(404).send({
