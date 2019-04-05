@@ -27,4 +27,4 @@ const trackSchema = new mongoose.Schema(
         }
     });
 
-module.exports = mongoose.model('Track', trackSchema);
+module.exports = mongoose.model('track', trackSchema);

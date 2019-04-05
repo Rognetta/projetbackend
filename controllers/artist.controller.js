@@ -1,26 +1,25 @@
-const Album = require('../models/albums.model.js');
+const Artist = require('../models/artist.model.js');
 
-// Create and Save a new Album
+// Create and Save a new Artist
 exports.create = (req, res) => {
     // Validate request
-    if (!req.body.title) {
+    if (!req.body.nom) {
         return res.status(400).send({
             message: 'title can not be empty'
         });
     }
 
     // Create a new User
-    const album = new Album({
+    const artist = new Artist({
 
-        title: req.body.title,
-        date: req.body.release,
-        genre : req.body.genre,
-        cover_URL : req.body.cover_URL,
-        tracks : req.body.tracks || ''
+        nom: req.body.nom,
+        birth: req.body.birth,
+        followers : req.body.followers,
+        albums : req.body.albums || ''
     });
 
     // Save User in the database
-    album
+    artist
         .save()
         .then(data => {
             // we wait for insertion to be complete and we send the newly user integrated
@@ -30,7 +29,7 @@ exports.create = (req, res) => {
             // In case of error during insertion of a new user in database we send an
             // appropriate message
             res.status(500).send({
-                message: err.message || 'Some error occurred while creating the album.'
+                message: err.message || 'Some error occurred while creating the artist.'
             });
         });
 };
@@ -39,9 +38,9 @@ exports.create = (req, res) => {
 /** @member {Object} */
 
 exports.findAll = (req, res) => {
-    Album.find()
-        .then(albums => {
-            res.send(albums);
+    Artist.find()
+        .then(artists => {
+            res.send(artists);
         })
 
         .catch(err => {
@@ -55,14 +54,14 @@ exports.findAll = (req, res) => {
 /** @member {Object} */
 
 exports.findOne = (req, res) => {
-    Album.findById(req.params.id)
-        .then(album => {
-            if (!album) {
+    Artist.findById(req.params.id)
+        .then(artist => {
+            if (!artist) {
                 return res.status(404).send({
                     message: 'User not found with id ' + req.params.id
                 });
             }
-            res.send(album);
+            res.send(artist);
         })
         .catch(err => {
             if (err.kind === 'ObjectId') {
@@ -79,31 +78,30 @@ exports.findOne = (req, res) => {
 // Update a User identified by the UserId in the request
 exports.update = (req, res) => {
     // Validate Request
-    if (!req.body.title) {
+    if (!req.body.nom) {
         return res.status(400).send({
             message: 'first name can not be empty'
         });
     }
 
     // Find user and update it with the request body
-    Album.findByIdAndUpdate(
+    Artist.findByIdAndUpdate(
         req.params.id,
         {
-            title: req.body.title,
-            date: req.body.release,
-            genre : req.body.genre,
-            cover_URL : req.body.cover_URL,
-            tracks : req.body.tracks || ''
+            nom: req.body.nom,
+            birth: req.body.birth,
+            followers : req.body.followers,
+            albums : req.body.albums || ''
         },
         { new: true }
     )
-        .then(album => {
-            if (!album) {
+        .then(artist => {
+            if (!artist) {
                 return res.status(404).send({
                     message: 'User not found with id ' + req.params.id
                 });
             }
-            res.send(album);
+            res.send(artist);
         })
         .catch(err => {
             if (err.kind === 'ObjectId') {
@@ -119,9 +117,9 @@ exports.update = (req, res) => {
 
 // Delete a User with the specified UserId in the request
 exports.delete = (req, res) => {
-    Album.findByIdAndRemove(req.params.id)
-        .then(album => {
-            if (!album) {
+    Artist.findByIdAndRemove(req.params.id)
+        .then(artist => {
+            if (!artist) {
                 return res.status(404).send({
                     message: 'User not found with id ' + req.params.id
                 });

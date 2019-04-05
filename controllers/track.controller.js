@@ -79,7 +79,7 @@ exports.findOne = (req, res) => {
 // Update a User identified by the UserId in the request
 exports.update = (req, res) => {
     // Validate Request
-    if (!req.body.title) {
+    if (!req.body.nom) {
         return res.status(400).send({
             message: 'first name can not be empty'
         });
@@ -89,8 +89,8 @@ exports.update = (req, res) => {
     Album.findByIdAndUpdate(
         req.params.id,
         {
-            title: req.body.title,
-            date: req.body.release,
+            title: req.body.nom,
+            date: req.body.date,
             genre : req.body.genre,
             cover_URL : req.body.cover_URL,
             tracks : req.body.tracks || ''
@@ -119,7 +119,7 @@ exports.update = (req, res) => {
 
 // Delete a User with the specified UserId in the request
 exports.delete = (req, res) => {
-    Album.findByIdAndRemove(req.params.id)
+    Album.findByIdAndRemove(req.params.albumId)
         .then(album => {
             if (!album) {
                 return res.status(404).send({
