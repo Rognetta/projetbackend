@@ -9,7 +9,7 @@ exports.create = (req, res) => {
         });
     }
 
-    // Create a new User
+    // Create a new Album
     const album = new Album({
 
         title: req.body.title,
@@ -19,23 +19,22 @@ exports.create = (req, res) => {
         tracks : req.body.tracks || ''
     });
 
-    // Save User in the database
+    // Save Album in the database
     album
         .save()
         .then(data => {
-            // we wait for insertion to be complete and we send the newly user integrated
+            // we wait for insertion to be complete and we send the newly Album integrated
             res.send(data);
         })
         .catch(err => {
-            // In case of error during insertion of a new user in database we send an
-            // appropriate message
+            /* In case of error during insertion of a new Album in database we send an appropriate message*/
             res.status(500).send({
                 message: err.message || 'Some error occurred while creating the album.'
             });
         });
 };
 
-// Retrieve and return all Users from the database.
+// Retrieve and return all Albums from the database.
 /** @member {Object} */
 
 exports.findAll = (req, res) => {
@@ -46,12 +45,12 @@ exports.findAll = (req, res) => {
 
         .catch(err => {
             res.status(500).send({
-                message: err.message || 'Some error occurred while retrieving users.'
+                message: err.message || 'Some error occurred while retrieving Albums.'
             })
         });
 };
 
-// Find a single User with a UserId
+// Find a single Album with a id
 /** @member {Object} */
 
 exports.findOne = (req, res) => {
@@ -59,7 +58,7 @@ exports.findOne = (req, res) => {
         .then(album => {
             if (!album) {
                 return res.status(404).send({
-                    message: 'User not found with id ' + req.params.id
+                    message: 'Album not found with id ' + req.params.id
                 });
             }
             res.send(album);
@@ -67,7 +66,7 @@ exports.findOne = (req, res) => {
         .catch(err => {
             if (err.kind === 'ObjectId') {
                 return res.status(404).send({
-                    message: 'User not found with id ' + req.params.id
+                    message: 'Album not found with id ' + req.params.id
                 });
             }
             return res.status(500).send({
@@ -76,16 +75,16 @@ exports.findOne = (req, res) => {
         });
 };
 
-// Update a User identified by the UserId in the request
+// Update a Album identified by the id in the request
 exports.update = (req, res) => {
     // Validate Request
     if (!req.body.title) {
         return res.status(400).send({
-            message: 'first name can not be empty'
+            message: 'album title can not be empty'
         });
     }
 
-    // Find user and update it with the request body
+    // Find Album and update it with the request body
     Album.findByIdAndUpdate(
         req.params.id,
         {
@@ -100,7 +99,7 @@ exports.update = (req, res) => {
         .then(album => {
             if (!album) {
                 return res.status(404).send({
-                    message: 'User not found with id ' + req.params.id
+                    message: 'Album not found with id ' + req.params.id
                 });
             }
             res.send(album);
@@ -108,34 +107,34 @@ exports.update = (req, res) => {
         .catch(err => {
             if (err.kind === 'ObjectId') {
                 return res.status(404).send({
-                    message: 'User not found with id ' + req.params.id
+                    message: 'Album not found with id ' + req.params.id
                 });
             }
             return res.status(500).send({
-                message: 'Error updating user with id ' + req.params.id
+                message: 'Error updating album with id ' + req.params.id
             });
         });
 };
 
-// Delete a User with the specified UserId in the request
+// Delete an Album with the specified id in the request
 exports.delete = (req, res) => {
     Album.findByIdAndRemove(req.params.id)
         .then(album => {
             if (!album) {
                 return res.status(404).send({
-                    message: 'User not found with id ' + req.params.id
+                    message: 'Album not found with id ' + req.params.id
                 });
             }
-            res.send({ message: 'User deleted successfully!' });
+            res.send({ message: 'Album deleted successfully!' });
         })
         .catch(err => {
             if (err.kind === 'ObjectId' || err.name === 'NotFound') {
                 return res.status(404).send({
-                    message: 'User not found with id ' + req.params.id
+                    message: 'Album not found with id ' + req.params.id
                 });
             }
             return res.status(500).send({
-                message: 'Could not delete user with id ' + req.params.id
+                message: 'Could not delete album with id ' + req.params.id
             });
         });
 };

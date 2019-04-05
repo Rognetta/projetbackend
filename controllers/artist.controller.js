@@ -5,11 +5,11 @@ exports.create = (req, res) => {
     // Validate request
     if (!req.body.nom) {
         return res.status(400).send({
-            message: 'title can not be empty'
+            message: 'Name can not be empty'
         });
     }
 
-    // Create a new User
+    // Create a new Artist
     const artist = new Artist({
 
         nom: req.body.nom,
@@ -18,23 +18,22 @@ exports.create = (req, res) => {
         albums : req.body.albums || ''
     });
 
-    // Save User in the database
+    // Save Artist in the database
     artist
         .save()
         .then(data => {
-            // we wait for insertion to be complete and we send the newly user integrated
+            // we wait for insertion to be complete and we send the newly artist integrated
             res.send(data);
         })
         .catch(err => {
-            // In case of error during insertion of a new user in database we send an
-            // appropriate message
+            // In case of error during insertion of a new artist in database we send an appropriate message
             res.status(500).send({
                 message: err.message || 'Some error occurred while creating the artist.'
             });
         });
 };
 
-// Retrieve and return all Users from the database.
+// Retrieve and return all Artists from the database.
 /** @member {Object} */
 
 exports.findAll = (req, res) => {
@@ -45,12 +44,12 @@ exports.findAll = (req, res) => {
 
         .catch(err => {
             res.status(500).send({
-                message: err.message || 'Some error occurred while retrieving users.'
+                message: err.message || 'Some error occurred while retrieving artists.'
             })
         });
 };
 
-// Find a single User with a UserId
+// Find a single Artist with a id
 /** @member {Object} */
 
 exports.findOne = (req, res) => {
@@ -58,7 +57,7 @@ exports.findOne = (req, res) => {
         .then(artist => {
             if (!artist) {
                 return res.status(404).send({
-                    message: 'User not found with id ' + req.params.id
+                    message: 'Artist not found with id ' + req.params.id
                 });
             }
             res.send(artist);
@@ -66,16 +65,16 @@ exports.findOne = (req, res) => {
         .catch(err => {
             if (err.kind === 'ObjectId') {
                 return res.status(404).send({
-                    message: 'User not found with id ' + req.params.id
+                    message: 'Artist not found with id ' + req.params.id
                 });
             }
             return res.status(500).send({
-                message: 'Error retrieving user with id ' + req.params.id
+                message: 'Error retrieving artist with id ' + req.params.id
             });
         });
 };
 
-// Update a User identified by the UserId in the request
+// Update a Artist identified by the id in the request
 exports.update = (req, res) => {
     // Validate Request
     if (!req.body.nom) {
@@ -84,7 +83,7 @@ exports.update = (req, res) => {
         });
     }
 
-    // Find user and update it with the request body
+    // Find artist and update it with the request body
     Artist.findByIdAndUpdate(
         req.params.id,
         {
@@ -98,7 +97,7 @@ exports.update = (req, res) => {
         .then(artist => {
             if (!artist) {
                 return res.status(404).send({
-                    message: 'User not found with id ' + req.params.id
+                    message: 'Artist not found with id ' + req.params.id
                 });
             }
             res.send(artist);
@@ -106,34 +105,34 @@ exports.update = (req, res) => {
         .catch(err => {
             if (err.kind === 'ObjectId') {
                 return res.status(404).send({
-                    message: 'User not found with id ' + req.params.id
+                    message: 'Artist not found with id ' + req.params.id
                 });
             }
             return res.status(500).send({
-                message: 'Error updating user with id ' + req.params.id
+                message: 'Error updating artist with id ' + req.params.id
             });
         });
 };
 
-// Delete a User with the specified UserId in the request
+// Delete an Artist with the specified id in the request
 exports.delete = (req, res) => {
     Artist.findByIdAndRemove(req.params.id)
         .then(artist => {
             if (!artist) {
                 return res.status(404).send({
-                    message: 'User not found with id ' + req.params.id
+                    message: 'Artist not found with id ' + req.params.id
                 });
             }
-            res.send({ message: 'User deleted successfully!' });
+            res.send({ message: 'Artist deleted successfully!' });
         })
         .catch(err => {
             if (err.kind === 'ObjectId' || err.name === 'NotFound') {
                 return res.status(404).send({
-                    message: 'User not found with id ' + req.params.id
+                    message: 'Artist not found with id ' + req.params.id
                 });
             }
             return res.status(500).send({
-                message: 'Could not delete user with id ' + req.params.id
+                message: 'Could not delete artist with id ' + req.params.id
             });
         });
 };

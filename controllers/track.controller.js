@@ -9,7 +9,7 @@ exports.create = (req, res) => {
         });
     }
 
-    // Create a new User
+    // Create a new Track
     const track = new Track({
 
         title: req.body.title,
@@ -19,15 +19,15 @@ exports.create = (req, res) => {
         featuring : req.body.featuring || ''
     });
 
-    // Save User in the database
+    // Save Track in the database
     track
         .save()
         .then(data => {
-            // we wait for insertion to be complete and we send the newly user integrated
+            // we wait for insertion to be complete and we send the newly Track integrated
             res.send(data);
         })
         .catch(err => {
-            // In case of error during insertion of a new user in database we send an
+            // In case of error during insertion of a new Track in database we send an
             // appropriate message
             res.status(500).send({
                 message: err.message || 'Some error occurred while creating the track.'
@@ -35,7 +35,7 @@ exports.create = (req, res) => {
         });
 };
 
-// Retrieve and return all Users from the database.
+// Retrieve and return all Tracks from the database.
 /** @member {Object} */
 
 exports.findAll = (req, res) => {
@@ -46,12 +46,12 @@ exports.findAll = (req, res) => {
 
         .catch(err => {
             res.status(500).send({
-                message: err.message || 'Some error occurred while retrieving users.'
+                message: err.message || 'Some error occurred while retrieving Tracks.'
             })
         });
 };
 
-// Find a single User with a UserId
+// Find a single Track with a id
 /** @member {Object} */
 
 exports.findOne = (req, res) => {
@@ -59,7 +59,7 @@ exports.findOne = (req, res) => {
         .then(track => {
             if (!track) {
                 return res.status(404).send({
-                    message: 'User not found with id ' + req.params.id
+                    message: 'Track not found with id ' + req.params.id
                 });
             }
             res.send(track);
@@ -67,25 +67,25 @@ exports.findOne = (req, res) => {
         .catch(err => {
             if (err.kind === 'ObjectId') {
                 return res.status(404).send({
-                    message: 'User not found with id ' + req.params.id
+                    message: 'Track not found with id ' + req.params.id
                 });
             }
             return res.status(500).send({
-                message: 'Error retrieving user with id ' + req.params.id
+                message: 'Error retrieving Track with id ' + req.params.id
             });
         });
 };
 
-// Update a User identified by the UserId in the request
+// Update a Track identified by the id in the request
 exports.update = (req, res) => {
     // Validate Request
     if (!req.body.nom) {
         return res.status(400).send({
-            message: 'first name can not be empty'
+            message: 'Track name can not be empty'
         });
     }
 
-    // Find user and update it with the request body
+    // Find Track and update it with the request body
     Track.findByIdAndUpdate(
         req.params.id,
         {
@@ -100,7 +100,7 @@ exports.update = (req, res) => {
         .then(track => {
             if (!track) {
                 return res.status(404).send({
-                    message: 'User not found with id ' + req.params.id
+                    message: 'Track not found with id ' + req.params.id
                 });
             }
             res.send(track);
@@ -108,7 +108,7 @@ exports.update = (req, res) => {
         .catch(err => {
             if (err.kind === 'ObjectId') {
                 return res.status(404).send({
-                    message: 'User not found with id ' + req.params.id
+                    message: 'Track not found with id ' + req.params.id
                 });
             }
             return res.status(500).send({
@@ -117,25 +117,25 @@ exports.update = (req, res) => {
         });
 };
 
-// Delete a User with the specified UserId in the request
+// Delete a Track with the specified id in the request
 exports.delete = (req, res) => {
     Track.findByIdAndRemove(req.params.id)
         .then(track => {
             if (!track) {
                 return res.status(404).send({
-                    message: 'User not found with id ' + req.params.id
+                    message: 'Track not found with id ' + req.params.id
                 });
             }
-            res.send({ message: 'User deleted successfully!' });
+            res.send({ message: 'Track deleted successfully!' });
         })
         .catch(err => {
             if (err.kind === 'ObjectId' || err.name === 'NotFound') {
                 return res.status(404).send({
-                    message: 'User not found with id ' + req.params.id
+                    message: 'Track not found with id ' + req.params.id
                 });
             }
             return res.status(500).send({
-                message: 'Could not delete user with id ' + req.params.id
+                message: 'Could not delete Track with id ' + req.params.id
             });
         });
 };
