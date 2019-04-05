@@ -23,7 +23,8 @@ const trackSchema = new mongoose.Schema(
         },
 
         featuring : {
-            type : mongoose.Schema.Types.ObjectId
+            type : mongoose.Schema.Types.ObjectId,
+            required : true
         }
     });
 
