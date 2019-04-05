@@ -1,6 +1,6 @@
-const Album = require('../models/albums.model.js');
+const Track = require('../models/track.model.js');
 
-// Create and Save a new Album
+// Create and Save a new Track
 exports.create = (req, res) => {
     // Validate request
     if (!req.body.title) {
@@ -10,17 +10,17 @@ exports.create = (req, res) => {
     }
 
     // Create a new User
-    const album = new Album({
+    const track = new Track({
 
         title: req.body.title,
-        date: req.body.release,
-        genre : req.body.genre,
-        cover_URL : req.body.cover_URL,
-        tracks : req.body.tracks || ''
+        duration: req.body.duration,
+        listenings : req.body.listenings,
+        likes : req.body.likes,
+        featuring : req.body.featuring || ''
     });
 
     // Save User in the database
-    album
+    track
         .save()
         .then(data => {
             // we wait for insertion to be complete and we send the newly user integrated
@@ -30,7 +30,7 @@ exports.create = (req, res) => {
             // In case of error during insertion of a new user in database we send an
             // appropriate message
             res.status(500).send({
-                message: err.message || 'Some error occurred while creating the album.'
+                message: err.message || 'Some error occurred while creating the track.'
             });
         });
 };
@@ -39,9 +39,9 @@ exports.create = (req, res) => {
 /** @member {Object} */
 
 exports.findAll = (req, res) => {
-    Album.find()
-        .then(albums => {
-            res.send(albums);
+    Track.find()
+        .then(tracks => {
+            res.send(tracks);
         })
 
         .catch(err => {
@@ -55,14 +55,14 @@ exports.findAll = (req, res) => {
 /** @member {Object} */
 
 exports.findOne = (req, res) => {
-    Album.findById(req.params.id)
-        .then(album => {
-            if (!album) {
+    Track.findById(req.params.id)
+        .then(track => {
+            if (!track) {
                 return res.status(404).send({
                     message: 'User not found with id ' + req.params.id
                 });
             }
-            res.send(album);
+            res.send(track);
         })
         .catch(err => {
             if (err.kind === 'ObjectId') {
@@ -86,24 +86,24 @@ exports.update = (req, res) => {
     }
 
     // Find user and update it with the request body
-    Album.findByIdAndUpdate(
+    Track.findByIdAndUpdate(
         req.params.id,
         {
-            title: req.body.nom,
-            date: req.body.date,
-            genre : req.body.genre,
-            cover_URL : req.body.cover_URL,
-            tracks : req.body.tracks || ''
+            title: req.body.title,
+            duration: req.body.duration,
+            listenings : req.body.listenings,
+            likes : req.body.likes,
+            featuring : req.body.featuring || ''
         },
         { new: true }
     )
-        .then(album => {
-            if (!album) {
+        .then(track => {
+            if (!track) {
                 return res.status(404).send({
                     message: 'User not found with id ' + req.params.id
                 });
             }
-            res.send(album);
+            res.send(track);
         })
         .catch(err => {
             if (err.kind === 'ObjectId') {
@@ -119,9 +119,9 @@ exports.update = (req, res) => {
 
 // Delete a User with the specified UserId in the request
 exports.delete = (req, res) => {
-    Album.findByIdAndRemove(req.params.albumId)
-        .then(album => {
-            if (!album) {
+    Track.findByIdAndRemove(req.params.id)
+        .then(track => {
+            if (!track) {
                 return res.status(404).send({
                     message: 'User not found with id ' + req.params.id
                 });

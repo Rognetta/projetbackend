@@ -7,6 +7,10 @@ var indexRouter = require('./routes/index');
 
 var albumsRouter = require('./routes/album.js');
 
+var artistRouter = require('./routes/artist.js');
+
+var trackRouter = require('./routes/track.js');
+
 var app = express();
 
 //mongoose connection
@@ -18,7 +22,7 @@ var db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 db.once('open', function(callback){
-    console.log('connected to my base de donnée');
+    console.log('connected to projetWebBackEnd');
 });
 
 
@@ -30,5 +34,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/album', albumsRouter);
+app.use('/track', trackRouter);
+app.use('/artist', artistRouter);
 
 module.exports = app;

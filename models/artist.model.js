@@ -23,4 +23,4 @@ const artistSchema = new mongoose.Schema(
         }
     });
 
-module.exports = mongoose.model('artist', artistSchema);
+module.exports = mongoose.model('artist', artistSchema, 'artist');

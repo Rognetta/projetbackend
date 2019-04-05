@@ -27,4 +27,4 @@ const albumSchema = new mongoose.Schema(
         }
     });
 
-module.exports = mongoose.model('album', albumSchema);
+module.exports = mongoose.model('album', albumSchema, 'album');
