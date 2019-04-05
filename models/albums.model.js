@@ -23,7 +23,8 @@ const albumSchema = new mongoose.Schema(
         },
 
         tracks : {
-            type : mongoose.Schema.Types.ObjectId
+            type : mongoose.Schema.Types.ObjectId,
+            required : true
         }
     });
 
